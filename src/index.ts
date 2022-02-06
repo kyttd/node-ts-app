@@ -44,6 +44,9 @@ class HitAndBlow {
         return 3;
       case "hard":
         return 4;
+      default:
+        const nerverValue: never = this.mode;
+        throw new Error(`${nerverValue}は無効なモードです`);
     }
   }
 
