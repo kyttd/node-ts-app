@@ -17,6 +17,8 @@ const promptInput = async (text: string) => {
   return input.trim();
 };
 
+type Mode = "normal" | "hard";
+
 class HitAndBlow {
   private readonly answerSource = [
     "0",
@@ -32,9 +34,9 @@ class HitAndBlow {
   ];
   private answer: string[] = [];
   private tryCount = 0;
-  private mode: "normal" | "hard";
+  private mode: Mode;
 
-  constructor(mode: "normal" | "hard") {
+  constructor(mode: Mode) {
     this.mode = mode;
   }
 
