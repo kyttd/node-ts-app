@@ -18,7 +18,18 @@ const promptInput = async (text: string) => {
 };
 
 class HitAndBlow {
-  private answerSource = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  private readonly answerSource = [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+  ];
   private answer: string[] = [];
   private tryCount = 0;
 
@@ -38,6 +49,12 @@ class HitAndBlow {
     const inputArr = (
       await promptInput("「,」区切りで3つの数字を入力してください")
     ).split(",");
+
+    if (!this.validate(inputArr)) {
+      printLine("無効な入力です。");
+      await this.play();
+      return;
+    }
     const result = this.check(inputArr);
 
     if (result.hit !== this.answer.length) {
@@ -68,6 +85,23 @@ class HitAndBlow {
       blow: blowCount,
     };
   }
+
+  end() {
+    printLine(`正解です！ \n試行回数： ${this.tryCount}回`);
+    process.exit();
+  }
+
+  private validate(inputArr: string[]) {
+    const isLengthValid = inputArr.length === this.answer.length;
+    const isAllAnswerSourceOption = inputArr.every((val) =>
+      this.answerSource.includes(val)
+    );
+    const isAllDifferentValues = inputArr.every(
+      (val, i) => inputArr.indexOf(val) === i
+    );
+
+    return isLengthValid && isAllAnswerSourceOption && isAllDifferentValues;
+  }
 }
 
 process.stdout.write(sayHello("Michael Jackson"));
@@ -76,4 +110,5 @@ process.stdout.write(sayHello("Michael Jackson"));
   const hitAndBlow = new HitAndBlow();
   hitAndBlow.setting();
   await hitAndBlow.play();
+  hitAndBlow.end();
 })();
