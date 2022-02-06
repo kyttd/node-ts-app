@@ -59,21 +59,19 @@ var promptInput = function (text) { return __awaiter(void 0, void 0, void 0, fun
         }
     });
 }); };
+var HitAndBlow = /** @class */ (function () {
+    function HitAndBlow() {
+        this.answerSource = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+        this.answer = [];
+        this.tryCount = 0;
+    }
+    return HitAndBlow;
+}());
 process.stdout.write(sayHello("Michael Jackson"));
 (function () { return __awaiter(void 0, void 0, void 0, function () {
-    var name, age;
+    var hitAndBlow;
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, promptInput("名前を入力してください")];
-            case 1:
-                name = _a.sent();
-                console.log(name);
-                return [4 /*yield*/, promptInput("年齢を入力してください")];
-            case 2:
-                age = _a.sent();
-                console.log(age);
-                process.exit();
-                return [2 /*return*/];
-        }
+        hitAndBlow = new HitAndBlow();
+        return [2 /*return*/];
     });
 }); })();
