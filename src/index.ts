@@ -18,15 +18,9 @@ const promptInput = async (text: string) => {
 };
 
 class HitAndBlow {
-  answerSource: string[];
-  answer: string[];
-  tryCount: number;
-
-  constructor() {
-    this.answerSource = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-    this.answer = [];
-    this.tryCount = 0;
-  }
+  answerSource = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  answer: string[] = [];
+  tryCount = 0;
 }
 
 process.stdout.write(sayHello("Michael Jackson"));
