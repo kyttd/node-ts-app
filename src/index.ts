@@ -7,14 +7,36 @@ const printLine = (text: string, breakline: boolean = true) => {
   process.stdout.write(text + (breakline ? "\n" : ""));
 };
 
-// 対話用の関数
-const promptInput = async (text: string) => {
-  printLine(`\n${text}\n> `, false);
+const readLine = async () => {
   const input: string = await new Promise((resolve) =>
     process.stdin.once("data", (data) => resolve(data.toString()))
   );
 
   return input.trim();
+};
+
+// 対話用の関数
+const promptInput = async (text: string) => {
+  printLine(`\n${text}\n> `, false);
+
+  return readLine();
+};
+
+const promptSelect = async (text: string, values: readonly string[]) => {
+  printLine(`\n${text}\n> `);
+  values.forEach((value) => {
+    printLine(`- ${value}`);
+  });
+  printLine(`> `, false);
+
+  const input = await readLine();
+  if (values.includes(input)) {
+    return input;
+  } else {
+    return promptSelect(text, values);
+  }
+
+  return readLine();
 };
 
 type Mode = "normal" | "hard";
