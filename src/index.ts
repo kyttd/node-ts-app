@@ -1,3 +1,25 @@
+class GameProcedure {
+  private currentGameTitle = "hit and blow";
+  private currentGame = new HitAndBlow();
+
+  public async start() {
+    await this.play();
+  }
+
+  private async play() {
+    printLine(`===\n${this.currentGameTitle}を開始します。\n===`);
+    await this.currentGame.setting();
+    await this.currentGame.play();
+    this.currentGame.end();
+    this.end();
+  }
+
+  private end() {
+    printLine("ゲームを終了しました。");
+    process.exit();
+  }
+}
+
 const sayHello = (name: string) => {
   return `Hello, ${name}!`;
 };
@@ -131,7 +153,6 @@ class HitAndBlow {
 
   end() {
     printLine(`正解です！ \n試行回数： ${this.tryCount}回`);
-    process.exit();
   }
 
   private validate(inputArr: string[]) {
@@ -150,8 +171,5 @@ class HitAndBlow {
 process.stdout.write(sayHello("Michael Jackson"));
 
 (async () => {
-  const hitAndBlow = new HitAndBlow();
-  await hitAndBlow.setting();
-  await hitAndBlow.play();
-  hitAndBlow.end();
+  new GameProcedure().start();
 })();
