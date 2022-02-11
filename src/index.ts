@@ -20,10 +20,6 @@ class GameProcedure {
   }
 }
 
-const sayHello = (name: string) => {
-  return `Hello, ${name}!`;
-};
-
 // 受け取った値を出力
 const printLine = (text: string, breakline: boolean = true) => {
   process.stdout.write(text + (breakline ? "\n" : ""));
@@ -167,8 +163,6 @@ class HitAndBlow {
     return isLengthValid && isAllAnswerSourceOption && isAllDifferentValues;
   }
 }
-
-process.stdout.write(sayHello("Michael Jackson"));
 
 (async () => {
   new GameProcedure().start();
